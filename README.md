@@ -6,41 +6,44 @@ An intelligent, local developer tool that automatically translates messy raw cod
 
 This project is built using **Google's Agent Development Kit (ADK)** and leverages a local **Ollama** model running off-cloud to maintain total code privacy. It utilizes three core components to ensure accuracy and safety:
 
-                  \+----------------------------------+  
-                  |           Developer              |  
-                  |     (Modifies code / App)        |  
-                  \+-----------------+----------------+  
-                                    |  
-                                    v \[Generates Diff\]  
-                  \+-----------------+----------------+  
-                  |          git\_diff.txt            |  
-                  \+-----------------+----------------+  
-                                    |  
-                                    v \[Reads Input\]  
-                                    \+-----------------------------------+-----------------------------------+  
-                                    |                           ADK AGENT RUNNER                            |  
-                                    |                                                                       |  
-                                    |  \+--------------------+   Query rules   \+--------------------------+  |  
-                                    |  |     Agent Skill    | \--------------\> |  Context 7 MCP Server    |  |  
-                                    |  |    (SKILL.md)      | \<-------------- |  (get\_formatting\_rules)  |  | 
-                                    |  \+---------+----------+   Rules return  \+--------------------------+  |  
-                                    |            |                                                          |  
-                                    |            v \[Sends instruction \+ context \+ diff\]                     |  
-                                    |  \+---------+----------+                                               |  
-                                    |  |  Ollama Model      | (gemma4:e4b on http://localhost:11434)        |  
-                                    |  \+---------+----------+                                               |  
-                                    |            |                                                          |  
-                                    |            v \[Outputs Drafted Message\]                                |  
-                                    |  \+---------+----------+                                               |  
-                                    |  |  \[SECURITY GATE\]   | (Human-in-the-Loop prompt)                    |  
-                                    |  \+---------+----------+                                               |  
-                                    \+-----------------------------------+-----------------------------------+  
-                                    |  
-                                    | \[If Y (Approved)\]  
-                                    v  
-                  \+-----------------+----------------+  
-                  |         commit\_log.txt           |  
-                  \+----------------------------------+
+              
+                                 \+----------------------------------+  
+                                 |           Developer               |  
+                                 |     (Modifies code / App)         |  
+                                 \+-----------------+----------------+  
+                                                    |  
+                                                    v \[Generates Diff\]  
+                                 \+-----------------+----------------+  
+                                 |          git\_diff.txt            |  
+                                 \+-----------------+----------------+  
+                                                    |                   
+                                                    v \[Reads Input\]  
+               \+-----------------------------------+------------------------------------+  
+               |                           ADK AGENT RUNNER                              |  
+               |                                                                         |  
+               |  \+--------------------+   Query rules     \+--------------------------+|  
+               |  |     Agent Skill     | \--------------\> |  Context 7 MCP Server     ||  
+               |  |    (SKILL.md)       | \<--------------  |  (get\_formatting\_rules) || 
+               |  \+---------+----------+   Rules return    \+--------------------------+|  
+               |             |                                                           |  
+               |             v \[Sends instruction \+ context \+ diff\]                  |  
+               |  \+---------+----------+                                                |  
+               |  |  Ollama Model       | (gemma4:e4b on http://localhost:11434)         |  
+               |  \+---------+----------+                                                |  
+               |             |                                                           |  
+               |             v \[Outputs Drafted Message\]                               |  
+               |  \+---------+----------+                                                |  
+               |  |  \[SECURITY GATE\]  | (Human-in-the-Loop prompt)                     |  
+               |  \+---------+----------+                                                |  
+               \+-----------------------------------+------------------------------------+  
+                                                    |  
+                                                    | \[If Y (Approved)\]  
+                                                    v  
+                                 \+-----------------+----------------+  
+                                 |         commit\_log.txt           |  
+                                 \+----------------------------------+
+ 
+ 
 
 1. **The Reasoning Engine:** Google's ADK orchestrates a local instance of Ollama running gemma4:e4b to interpret code diff patterns.  
 2. **The MCP Context Layer ("Context 7"):** A Model Context Protocol server exposing a tool (get\_formatting\_rules) to inject dynamic formatting constraints into the model's short-term context.  
