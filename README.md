@@ -17,24 +17,24 @@ This project is built using **Google's Agent Development Kit (ADK)** and leverag
                   \+-----------------+----------------+  
                                     |  
                                     v \[Reads Input\]  
-\+-----------------------------------+-----------------------------------+  
-|                           ADK AGENT RUNNER                             |  
-|                                                                        |  
-|  \+--------------------+   Query rules   \+--------------------------+ |  
-|  |     Agent Skill    | \--------------\> |  Context 7 MCP Server    | |  
-|  |    (SKILL.md)      | \<-------------- |  (get\_formatting\_rules) | |  
-|  \+---------+----------+   Rules return  \+--------------------------+ |  
-|            |                                                           |  
-|            v \[Sends instruction \+ context \+ diff\]                  |  
-|  \+---------+----------+                                               |  
-|  |  Ollama Model      | (gemma4:e4b on http://localhost:11434)         |  
-|  \+---------+----------+                                               |  
-|            |                                                           |  
-|            v \[Outputs Drafted Message\]                               |  
-|  \+---------+----------+                                               |  
-|  |  \[SECURITY GATE\]   | (Human-in-the-Loop prompt)                   |  
-|  \+---------+----------+                                               |  
-\+-----------------------------------+-----------------------------------+  
+                                    \+-----------------------------------+-----------------------------------+  
+                                    |                           ADK AGENT RUNNER                            |  
+                                    |                                                                       |  
+                                    |  \+--------------------+   Query rules   \+--------------------------+  |  
+                                    |  |     Agent Skill    | \--------------\> |  Context 7 MCP Server    |  |  
+                                    |  |    (SKILL.md)      | \<-------------- |  (get\_formatting\_rules)  |  | 
+                                    |  \+---------+----------+   Rules return  \+--------------------------+  |  
+                                    |            |                                                          |  
+                                    |            v \[Sends instruction \+ context \+ diff\]                     |  
+                                    |  \+---------+----------+                                               |  
+                                    |  |  Ollama Model      | (gemma4:e4b on http://localhost:11434)        |  
+                                    |  \+---------+----------+                                               |  
+                                    |            |                                                          |  
+                                    |            v \[Outputs Drafted Message\]                                |  
+                                    |  \+---------+----------+                                               |  
+                                    |  |  \[SECURITY GATE\]   | (Human-in-the-Loop prompt)                    |  
+                                    |  \+---------+----------+                                               |  
+                                    \+-----------------------------------+-----------------------------------+  
                                     |  
                                     | \[If Y (Approved)\]  
                                     v  
