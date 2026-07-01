@@ -1,0 +1,10 @@
+diff --git a/README.md b/README.md
+index a1f3b21..c8e9d41 100644
+--- a/README.md
++++ b/README.md
+@@ -12,3 +12,7 @@ Install dependencies and run:
+ npm install
+ npm start
++
++## API Documentation
++Interactive API schemas are accessible at /docs (Swagger UI) or /redoc (Redoc alternate UI) once the development server initializes.
